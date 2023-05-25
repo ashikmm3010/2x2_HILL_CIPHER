@@ -62,7 +62,9 @@ while True:
     #checking for inverse of key
     K = key_to_num(key)
     K_INV, status = Mat_Inverse(K)
-
+    if status == 0:
+        break
+    
     text = input("ENTER THE TEXT: ")
     
     text = text.replace(" ", "?")
