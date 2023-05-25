@@ -61,6 +61,37 @@ def num_to_text(num):
 
 ###############DECRYPT####################
 
+x,y = 0, 1
+
+def gcdExtended(a, b):
+    global x, y
+    if (a == 0):
+        x = 0
+        y = 1
+        return b
+    
+    gcd = gcdExtended(b % a, a)
+    x1 = x
+    y1 = y
+    x = y1 - (b // a) * x1
+    y = x1
+ 
+    return gcd
+ 
+ 
+def modInverse(A, M):
+    global x,y
+    g = gcdExtended(A, M)
+    if (g != 1):
+        print("Inverse doesn't exist")
+        error()
+        return 0
+ 
+    else:
+ 
+        res = (x % M + M) % M
+        return res
+
 def Mat_Inverse(array):
     status = 1
     K = [[0,0], [0,0]]
