@@ -78,19 +78,22 @@ def gcdExtended(a, b):
  
     return gcd
  
- 
+status = 1
+
 def modInverse(A, M):
     global x,y
+    global status
     g = gcdExtended(A, M)
     if (g != 1):
-        print("Inverse doesn't exist")
-        break
-        return 0
+        print("Inverse doesn't exist for the entered key\n"+
+              "Retry with another key")
+        status = 0
+        return 0, status
  
     else:
  
         res = (x % M + M) % M
-        return res
+        return res, status
 
 def Mat_Inverse(array):
     K_INV = [[0,0], [0,0]]
@@ -98,10 +101,14 @@ def Mat_Inverse(array):
     Det = int(np.linalg.det(array))
     Det_INV = 0
    
-    Det_INV = modInverse(Det,28)
+    Det_INV, status = modInverse(Det,28)
     
     K_INV = Mod_26_Key(K_INV)
     K_INV = Det_INV*K_INV
     
-    return K_INV
+    return K_INV, status
 
+def Float_to_Int(array):
+    for i in range(len(array)):
+        array[i] = int(array[i])
+    return array
